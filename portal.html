@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenTrack Waste Management System - Residents Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        .page-section {
+            padding: 4rem 0;
+        }
+        .btn { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 600; 
+            padding: 1rem 1.5rem; 
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); 
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- Header and Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+            <a href="index.html" class="text-2xl font-bold text-emerald-600">GreenTrack</a>
+            <div id="nav-links" class="mt-4 md:mt-0 flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-lg">
+                <a href="index.html" class="text-gray-700 hover:text-emerald-600 transition-colors">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-emerald-600 transition-colors">About</a>
+                <a href="features.html" class="text-gray-700 hover:text-emerald-600 transition-colors">Features</a>
+                <a href="portal.html" class="text-emerald-600 font-bold">Residents Portal</a>
+                <a href="dashboard.html" class="text-gray-700 hover:text-emerald-600 transition-colors">Dashboard</a>
+                <a href="admin.html" class="text-gray-700 hover:text-emerald-600 transition-colors">Admin Preview</a>
+                <a href="contact.html" class="text-gray-700 hover:text-emerald-600 transition-colors">Contact</a>
+            </div>
+            <div id="auth-links" class="mt-4 md:mt-0 flex space-x-4">
+                <!-- Links will be injected by the script -->
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section id="portal" class="page-section">
+            <div class="bg-white rounded-lg shadow-xl p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-emerald-700 mb-8 text-center border-b-2 border-emerald-300 pb-2">Residents Portal</h2>
+                
+                <div id="portalContent">
+                    <p class="text-xl text-gray-600 mb-6">Welcome to your portal! Here you can report issues and schedule services.</p>
+                
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="p-6 bg-emerald-50 rounded-lg shadow-md flex flex-col">
+                            <h3 class="text-2xl font-bold text-emerald-600 mb-4">Report an Issue</h3>
+                            <form id="reportForm" class="space-y-4">
+                                <div>
+                                    <label for="report-issue" class="block text-sm font-medium text-gray-700">Type of Issue</label>
+                                    <select id="report-issue" name="issue" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+                                        <option value="">Select an issue...</option>
+                                        <option value="missed_collection">Missed Collection</option>
+                                        <option value="illegal_dumping">Illegal Dumping</option>
+                                        <option value="damaged_bin">Damaged Bin/Container</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="report-location" class="block text-sm font-medium text-gray-700">Location (e.g., Street Name, Landmark)</label>
+                                    <input type="text" id="report-location" name="location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+                                </div>
+                                <div>
+                                    <label for="report-description" class="block text-sm font-medium text-gray-700">Description</label>
+                                    <textarea id="report-description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="w-full btn bg-emerald-600 text-white hover:bg-emerald-700">Submit Report</button>
+                                </div>
+                            </form>
+                            <div id="reportMessage" class="mt-4 text-center text-lg font-semibold text-green-500 hidden"></div>
+                        </div>
+                        
+                        <div class="p-6 bg-emerald-50 rounded-lg shadow-md flex flex-col">
+                            <h3 class="text-2xl font-bold text-emerald-600 mb-4">Schedule a Service</h3>
+                            <form id="scheduleForm" class="space-y-4">
+                                <div>
+                                    <label for="schedule-service" class="block text-sm font-medium text-gray-700">Service Type</label>
+                                    <select id="schedule-service" name="serviceType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+                                        <option value="">Select a service...</option>
+                                        <option value="bulky_waste_pickup">Bulky Waste Pickup</option>
+                                        <option value="e_waste_collection">E-Waste Collection</option>
+                                        <option value="hazardous_waste">Hazardous Waste Drop-off</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="schedule-date" class="block text-sm font-medium text-gray-700">Preferred Date</label>
+                                    <input type="date" id="schedule-date" name="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+                                </div>
+                                <div>
+                                    <label for="schedule-notes" class="block text-sm font-medium text-gray-700">Additional Notes</label>
+                                    <textarea id="schedule-notes" name="notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="w-full btn bg-emerald-600 text-white hover:bg-emerald-700">Submit Request</button>
+                                </div>
+                            </form>
+                            <div id="scheduleMessage" class="mt-4 text-center text-lg font-semibold text-green-500 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-facebook-f text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-linkedin-in text-2xl"></i></a>
+            </div>
+            <p class="text-sm mb-2">&copy; 2025 GreenTrack Waste Management. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 text-sm text-gray-400">
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <span>|</span>
+                <a href="#" class="hover:underline">Terms of Service</a>
+            </div>
+            <p class="mt-4 text-xs text-gray-500">Proudly supporting Kenya Vision 2030 and UN Sustainable Development Goals.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded. Starting script execution.');
+
+            try {
+                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+                console.log('Logged in user:', loggedInUser);
+            
+                const authLinks = document.getElementById('auth-links');
+                const navLinks = document.getElementById('nav-links');
+
+                /**
+                 * Renders the navigation links based on the user's login status.
+                 * It hides or shows the "Log In / Sign Up" and "Log Out" buttons.
+                 */
+                function renderNav() {
+                    console.log('Rendering navigation...');
+                    authLinks.innerHTML = '';
+                    const portalLink = navLinks.querySelector('a[href="portal.html"]');
+                    const dashboardLink = navLinks.querySelector('a[href="dashboard.html"]');
+
+                    if (loggedInUser) {
+                        // User is logged in, show logout button and portal/dashboard links
+                        const logoutBtn = document.createElement('button');
+                        logoutBtn.textContent = 'Log Out';
+                        logoutBtn.className = 'btn bg-red-500 text-white hover:bg-red-600 text-sm py-2 px-4';
+                        logoutBtn.addEventListener('click', () => {
+                            localStorage.removeItem('loggedInUser');
+                            window.location.reload();
+                        });
+                        authLinks.appendChild(logoutBtn);
+
+                        if (portalLink) {
+                            portalLink.classList.add('text-emerald-600', 'font-bold');
+                            portalLink.style.display = 'block';
+                        }
+                        if (dashboardLink) {
+                             dashboardLink.style.display = 'block';
+                        }
+                    } else {
+                        // User is not logged in, show login/signup button and hide portal/dashboard links
+                        const authLink = document.createElement('a');
+                        authLink.href = 'login-signup.html';
+                        authLink.className = 'btn bg-emerald-600 text-white hover:bg-emerald-700 text-sm py-2 px-4';
+                        authLink.textContent = 'Log In / Sign Up';
+                        authLinks.appendChild(authLink);
+
+                        if (portalLink) {
+                            portalLink.classList.remove('font-bold', 'text-emerald-600');
+                            portalLink.style.display = 'none';
+                        }
+                        if (dashboardLink) {
+                            dashboardLink.style.display = 'none';
+                        }
+                    }
+                    console.log('Navigation rendered successfully.');
+                }
+
+                const reportForm = document.getElementById('reportForm');
+                const reportMessage = document.getElementById('reportMessage');
+                const scheduleForm = document.getElementById('scheduleForm');
+                const scheduleMessage = document.getElementById('scheduleMessage');
+                
+                // Get user email from local storage. Added a null check.
+                const userEmail = localStorage.getItem('loggedInUser');
+                console.log('User email from local storage:', userEmail);
+
+                reportForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    console.log('Report form submitted.');
+                    const issue = reportForm['report-issue'].value;
+                    const location = reportForm['report-location'].value;
+                    const description = reportForm['report-description'].value;
+
+                    // Try to parse and store in local storage
+                    try {
+                        const reports = JSON.parse(localStorage.getItem('reports')) || [];
+                        reports.push({ email: userEmail, issue, location, description, timestamp: new Date() });
+                        localStorage.setItem('reports', JSON.stringify(reports));
+                        console.log('Report saved to local storage:', reports);
+                    } catch (error) {
+                        console.error('Error saving report to local storage:', error);
+                    }
+
+                    reportMessage.textContent = 'Report submitted successfully!';
+                    reportMessage.classList.remove('hidden');
+                    reportForm.reset();
+
+                    setTimeout(() => {
+                        reportMessage.classList.add('hidden');
+                    }, 3000);
+                });
+
+                scheduleForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    console.log('Schedule form submitted.');
+                    const serviceType = scheduleForm['schedule-service'].value;
+                    const date = scheduleForm['schedule-date'].value;
+                    const notes = scheduleForm['schedule-notes'].value;
+
+                    // Try to parse and store in local storage
+                    try {
+                        const serviceRequests = JSON.parse(localStorage.getItem('serviceRequests')) || [];
+                        serviceRequests.push({ email: userEmail, serviceType, date, notes, timestamp: new Date() });
+                        localStorage.setItem('serviceRequests', JSON.stringify(serviceRequests));
+                        console.log('Service request saved to local storage:', serviceRequests);
+                    } catch (error) {
+                        console.error('Error saving service request to local storage:', error);
+                    }
+
+                    scheduleMessage.textContent = 'Service request submitted successfully!';
+                    scheduleMessage.classList.remove('hidden');
+                    scheduleForm.reset();
+
+                    setTimeout(() => {
+                        scheduleMessage.classList.add('hidden');
+                    }, 3000);
+                });
+
+                renderNav();
+            } catch (error) {
+                console.error('An error occurred during script execution:', error);
+            }
+        });
+    </script>
+</body>
+</html>
